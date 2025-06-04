@@ -59,13 +59,24 @@ function calcularTotal() {
     }
   }
 
-  // pegar desconto e subtrair (sem deixar negativo)
+  // Pega o desconto percentual
+  const descontoPercentInput = document.getElementById('descontoPercent');
+  const descontoPercent = descontoPercentInput ? Number(descontoPercentInput.value) || 0 : 0;
+
+  // Aplica desconto percentual
+  if (descontoPercent > 0) {
+    total = total - (total * descontoPercent / 100);
+  }
+
+  // Pega desconto em reais
   const descontoInput = document.getElementById('desconto');
   const desconto = descontoInput ? parseFloat(descontoInput.value.replace("R$", "").replace(/\./g, "").replace(",", ".")) || 0 : 0;
-  total -= desconto;
-  if (total < 0) total = 0,00;
 
-  // atualizar o texto do total formatado em moeda BR
+  // Subtrai desconto em reais, sem deixar negativo
+  total -= desconto;
+  if (total < 0) total = 0;
+
+  // Atualiza texto do total formatado em moeda BR
   const resultadoTotal = document.getElementById('resultadoTotal');
   resultadoTotal.textContent = 'Total: R$ ' + total.toFixed(2).replace('.', ',');
 }
@@ -103,9 +114,13 @@ document.getElementById("desconto").addEventListener("input", function (e) {
   let valor = e.target.value.replace(/\D/g, ""); // Remove tudo que não é número
   valor = (valor / 100).toFixed(2) + ""; // Divide por 100 e fixa 2 casas
   valor = valor.replace(".", ","); // Troca ponto por vírgula
-  valor = "R$ " + valor.replace(/\B(?=(\d{3})+(?!\d))/g, "."); // Adiciona separador de milhar
+  valor = valor.replace(/\B(?=(\d{3})+(?!\d))/g, "."); // Adiciona separador de milhar
   e.target.value = valor;
 });
+
+
+
+
 
 
 
