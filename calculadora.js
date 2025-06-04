@@ -72,6 +72,18 @@ function calcularTotal() {
   const descontoInput = document.getElementById('desconto');
   const desconto = descontoInput ? parseFloat(descontoInput.value.replace("R$", "").replace(/\./g, "").replace(",", ".")) || 0 : 0;
 
+  // Adiciona taxa de entrega
+const taxaEntregaInput = document.getElementById('taxaEntrega');
+let taxaEntrega = 0;
+
+if (taxaEntregaInput) {
+  const valorFormatado = taxaEntregaInput.value.replace(/\./g, '').replace(',', '.');
+  taxaEntrega = Number(valorFormatado) || 0;
+}
+
+total += taxaEntrega;
+
+
   // Subtrai desconto em reais, sem deixar negativo
   total -= desconto;
   if (total < 0) total = 0;
@@ -95,6 +107,9 @@ botaoZerar.addEventListener('click', () => {
     const input = document.getElementById(id);
     if (input) {
       input.value = 0;
+      const taxaEntregaInput = document.getElementById('taxaEntrega');
+if (taxaEntregaInput) taxaEntregaInput.value = '0,00';
+
     }
   }
   // Limpa o campo de desconto também (opcional)
@@ -120,4 +135,11 @@ document.getElementById("desconto").addEventListener("input", function (e) {
   valor = valor.replace(".", ","); // Troca ponto por vírgula
   valor = valor.replace(/\B(?=(\d{3})+(?!\d))/g, "."); // Adiciona separador de milhar
   e.target.value = valor;
+});
+
+document.getElementById("taxaEntrega").addEventListener("input", function (e) {
+  let valor = e.target.value.replace(/\D/g, "");
+  valor = (valor / 100).toFixed(2) + "";
+  valor = valor.replace(".", ",");
+  e.target.value = valor.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 });
