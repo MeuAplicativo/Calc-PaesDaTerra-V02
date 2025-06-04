@@ -42,9 +42,9 @@ const precos = {
   salgadoFrangoRequeijao: 7,
   salgadoPresuntoMucarela: 7,
   salgadoCalabresaRequeijao: 7,
-  salgadinhoqueijo: 12.0,
+  salgadinhoqueijo: 15.0,
   
-  cookie100: 12.0
+  cookie100: 15.0
   
 };
 
