@@ -165,3 +165,9 @@ button:active {
   box-shadow: none;
   transform: translateY(2px);
 }
+
+input[type="number"],
+input[type="text"] {
+  text-align: left;
+}
+
