@@ -100,6 +100,10 @@ botaoZerar.addEventListener('click', () => {
   // Limpa o campo de desconto também (opcional)
   const descontoInput = document.getElementById('desconto');
   if (descontoInput) descontoInput.value = "0,00";
+
+   // Zera o campo de desconto em porcentagem
+  const descontoPorcentagem = document.getElementById('descontoPercent');
+  if (descontoPorcentagem) descontoPorcentagem.value = "0";
   
 
   // 🟨 NOVO: recolhe todos os <details> abertos
@@ -117,15 +121,3 @@ document.getElementById("desconto").addEventListener("input", function (e) {
   valor = valor.replace(/\B(?=(\d{3})+(?!\d))/g, "."); // Adiciona separador de milhar
   e.target.value = valor;
 });
-
-
-
-
-
-
-
-
-
-
-
-
