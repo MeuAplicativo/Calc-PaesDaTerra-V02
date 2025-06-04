@@ -168,6 +168,10 @@ button:active {
 
 input[type="number"],
 input[type="text"] {
+  width: 60px;      /* ou o valor que quiser, ex: 60px, 100px... */
+  height: 30px;     /* controla a altura */
+  padding: 4px 6px; /* controla o espaçamento interno */
+  font-size: 14px;  /* opcional: deixa a fonte proporcional */
   text-align: left;
 }
 
