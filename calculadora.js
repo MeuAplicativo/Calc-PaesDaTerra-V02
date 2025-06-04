@@ -126,6 +126,13 @@ if (taxaEntregaInput) taxaEntregaInput.value = '0,00';
     detalhe.open = false;
   });
 
+  // Reativa os campos de desconto
+  const descontoReais = document.getElementById("desconto");
+  const descontoPercent = document.getElementById("descontoPercent");
+
+  if (descontoReais) descontoReais.disabled = false;
+  if (descontoPercent) descontoPercent.disabled = false;
+
   calcularTotal();
 });
 
@@ -136,6 +143,41 @@ document.getElementById("desconto").addEventListener("input", function (e) {
   valor = valor.replace(/\B(?=(\d{3})+(?!\d))/g, "."); // Adiciona separador de milhar
   e.target.value = valor;
 });
+
+function atualizarCamposDesconto() {
+  const descontoReais = document.getElementById("desconto");
+  const descontoPercent = document.getElementById("descontoPercent");
+
+  // Remover formatação para comparar valores numéricos
+  let valorReais = descontoReais.value.replace(/\./g, '').replace(',', '.');
+  valorReais = parseFloat(valorReais) || 0;
+
+  let valorPercent = parseFloat(descontoPercent.value) || 0;
+
+  // Se valor reais > 0 desativa percentual, se zero reativa
+  descontoPercent.disabled = valorReais > 0;
+
+  // Se valor percentual > 0 desativa reais, se zero reativa
+  descontoReais.disabled = valorPercent > 0;
+}
+
+// Vincula o evento nos dois inputs
+document.getElementById("desconto").addEventListener("input", () => {
+  // formata o campo desconto em reais normalmente
+  let descontoInput = document.getElementById("desconto");
+  let valor = descontoInput.value.replace(/\D/g, ""); // só números
+  valor = (valor / 100).toFixed(2) + "";
+  valor = valor.replace(".", ",");
+  valor = valor.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  descontoInput.value = valor;
+
+  atualizarCamposDesconto();
+});
+
+document.getElementById("descontoPercent").addEventListener("input", () => {
+  atualizarCamposDesconto();
+});
+
 
 document.getElementById("taxaEntrega").addEventListener("input", function (e) {
   let valor = e.target.value.replace(/\D/g, "");
