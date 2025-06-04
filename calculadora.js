@@ -63,7 +63,7 @@ function calcularTotal() {
   const descontoInput = document.getElementById('desconto');
   const desconto = descontoInput ? parseFloat(descontoInput.value.replace("R$", "").replace(/\./g, "").replace(",", ".")) || 0 : 0;
   total -= desconto;
-  if (total < 0) total = 0;
+  if (total < 0) total = 0,00;
 
   // atualizar o texto do total formatado em moeda BR
   const resultadoTotal = document.getElementById('resultadoTotal');
@@ -88,7 +88,8 @@ botaoZerar.addEventListener('click', () => {
   }
   // Limpa o campo de desconto também (opcional)
   const descontoInput = document.getElementById('desconto');
-  if (descontoInput) descontoInput.value = 0,00;
+  if (descontoInput) descontoInput.value = "R$ 0,00";
+
 
   // 🟨 NOVO: recolhe todos os <details> abertos
   document.querySelectorAll("details").forEach((detalhe) => {
@@ -105,5 +106,7 @@ document.getElementById("desconto").addEventListener("input", function (e) {
   valor = "R$ " + valor.replace(/\B(?=(\d{3})+(?!\d))/g, "."); // Adiciona separador de milhar
   e.target.value = valor;
 });
+
+
 
 
